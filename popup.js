@@ -15,8 +15,8 @@
  */
 
 var google = new OAuth2('google', {
-  client_id: '952993494713-h12m6utvq8g8d8et8n2i68plbrr6cr4d.apps.googleusercontent.com',
-  client_secret: 'IZ4hBSbosuhoWAX4lyAomm-R',
+  client_id: oauth_client_id,
+  client_secret: oauth_client_secret,
   api_scope: 'https://www.googleapis.com/auth/tasks'
 });
 
