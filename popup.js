@@ -14,55 +14,33 @@
  * limitations under the License.
  */
 
-var google = new OAuth2('google', {
-  client_id: oauth_client_id,
-  client_secret: oauth_client_secret,
-  api_scope: 'https://www.googleapis.com/auth/tasks'
-});
+var google = new OAuth2("google", {
+  client_id:oauth_client_id,
+  client_secret:oauth_client_secret,
+  api_scope:"https://www.googleapis.com/auth/tasks"});
 
 google.authorize(function() {
+  var TASK_CREATE_URL = "https://www.googleapis.com/tasks/v1/lists/@default/tasks";
+  var TASKLISTS_LIST_URL = "https://www.googleapis.com/tasks/v1/users/@me/lists";
+  
+  var xhr = new XMLHttpRequest;
 
-  var TASK_CREATE_URL = 'https://www.googleapis.com/tasks/v1/lists/@default/tasks';
-
-  var form = document.getElementById('form');
-  var success = document.getElementById('success');
-
-  // Hook up the form to create a new task with Google Tasks
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    var input = document.getElementById('input');
-    createTodo(input.value);
-  });
-
-  function createTodo(task) {
-    // Make an XHR that creates the task
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(event) {
-      if (xhr.readyState == 4) {
-        if(xhr.status == 200) {
-          // Great success: parse response with JSON
-          var task = JSON.parse(xhr.responseText);
-          document.getElementById('taskid').innerHTML = task.id;
-          form.style.display = 'none';
-          success.style.display = 'block';
-
-        } else {
-          // Request failure: something bad happened
-        }
+  xhr.onreadystatechange = function(event) {
+    if(xhr.readyState == 4) {
+      if(xhr.status == 200) {
+        var task = JSON.parse(xhr.responseText);
+        console.log(task);
+        document.getElementById("taskid").innerHTML = task.id;
+        form.style.display = "none";
+        success.style.display = "block"
+      }else {
+        alert("Failure!")
       }
-    };
-
-    var message = JSON.stringify({
-      title: task
-    });
-
-    xhr.open('POST', TASK_CREATE_URL, true);
-
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Authorization', 'OAuth ' + google.getAccessToken());
-
-    xhr.send(message);
-  }
-
+    }
+  };
+  
+  xhr.open("GET", TASKLISTS_LIST_URL, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("Authorization", "OAuth " + google.getAccessToken());
+  xhr.send()
 });
-

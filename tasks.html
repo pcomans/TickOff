@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <!--
 Copyright 2011 Google Inc. All Rights Reserved.
@@ -16,24 +16,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<!DOCTYPE html>
 <html>
 <head>
-  <title>OAuth 2.0 Popup</title>
-  <script src="oauth_credentials.js"></script>
-  <script src="oauth2/oauth2.js"></script>
-  <script src="popup.js"></script>
-  <style>
-    #success { display: none; }
-  </style>
+	<meta charset="UTF-8">
+	<title>OAuth 2.0 Popup</title>
+	<script src="oauth_credentials.js"></script>
+	<script src="oauth2/oauth2.js"></script>
+	<script src="popup.js"></script>
+	<style>
+		#success { display: none; }
+	</style>
 </head>
 <body>
-  <form id="form">
-    <input id="input" placeholder="New task name..."></input>
-    <input id="button" type="submit" value="Create task"/>
-  </form>
-  <div id="success">
-    Successfully created new task with ID <span id="taskid"></span>.
-  </div>
+	<form id="form">
+		<input id="input" placeholder="New task name..."/>
+		<input id="button" type="submit" value="Create task"/>
+	</form>
+	<div id="success">
+		Successfully created new task with ID <span id="taskid"></span>.
+	</div>
 </body>
 </html>
